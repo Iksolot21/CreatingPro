@@ -92,14 +92,20 @@ match voit:
             l-=1           
     case 11:
         print("Диаг змейка по час стр")
-        n = 10
-        for i in range(n):
-            for j in range(n):
-                if i == j:  
-                    print("*", end="")
-                else:
-                    print(" ", end="")
-            print()
+        size_of_snake = int(input('size_of_snake'))
+        for i in range((size_of_snake//11)*2+1):
+            if i%2 == 0:
+                if size_of_snake < 10:
+                    print(size_of_snake * '▮')
+                    break
+                print(10 * '▮')
+                size_of_snake -=10
+            if (i%4 == 1):
+                print('▮')
+                size_of_snake -=1
+            if (i%4==3):
+                print(16*' '+'▮')
+                size_of_snake -=1
     case 12:
         print("Диагона змейка прот час стр")
         n = 10
