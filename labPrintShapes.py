@@ -1,12 +1,20 @@
 
+def print_rectangle(width: int, heights:int,symbol:bool):
+    """нарисовать прямоугольник в консоли
+    параметры: width: int, heights:int,symbol:bool
+    """
+
+
 x = 20
 h = 5
 s = 'a'
 voit = int(input("Enter a number: "))
 match voit:
     case 1:
+        #прямоугольник с признаком залития
         print('Прямоугольник')
         for r in range(h):
+
             print(s * x)
     case 2:
         print('Пустой прямоугольник')
@@ -68,6 +76,7 @@ match voit:
             l-=1
 
     case 10:
+        print("Песочные часы из символов")
         rows = int(input("Введите число: "))
         k=0
         l=rows//2
