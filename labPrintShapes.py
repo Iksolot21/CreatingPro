@@ -3,15 +3,12 @@ def print_rectangle(width: int, heights:int,symbol:bool):
     """нарисовать прямоугольник в консоли
     параметры: width: int, heights:int,symbol:bool
     """
-
-
 x = 20
 h = 5
 s = 'a'
 voit = int(input("Enter a number: "))
 match voit:
     case 1:
-        #прямоугольник с признаком залития
         print('Прямоугольник')
         for r in range(h):
 
@@ -93,42 +90,65 @@ match voit:
     case 11:
         print("Диаг змейка по час стр")
         size_of_snake = int(input('size_of_snake'))
+        l=size_of_snake
         for i in range((size_of_snake//11)*2+1):
             if i%2 == 0:
                 if size_of_snake < 10:
-                    print(size_of_snake * '▮')
+                    print(size_of_snake * '□')
                     break
-                print(10 * '▮')
+                print(10 * '□')
                 size_of_snake -=10
-            if (i%4 == 1):
-                print('▮')
-                size_of_snake -=1
+            if (i % 4 == 1):
+                print(' ' * ((l - 2) % 10), '□')
+                size_of_snake -= 1
             if (i%4==3):
-                print(16*' '+'▮')
+                print('□')
                 size_of_snake -=1
     case 12:
-        print("Диагона змейка прот час стр")
-        n = 10
-        for i in range(n):
-            for j in range(n):
-                if i + j == n - 1:
-                    print("*", end="") 
-                else:
-                    print(" ", end="")
-            print()
+        print("Диаг змейка против час стр")
+        size_of_snake = int(input('size_of_snake: '))
+        l = size_of_snake
+
+        for i in range((size_of_snake // 11) * 2 + 1):
+            if i % 2 == 0:
+                if size_of_snake <= 10:
+                    print(' ' * (10 - size_of_snake) + size_of_snake * '□')
+                    break
+                print(' ' * (10 - 10) + 10 * '□')
+                size_of_snake -= 10
+            if i % 4 == 1:
+                print('□')
+                size_of_snake -= 1
+            if i % 4 == 3:
+                print(' ' * ((l - 2) % 10), '□')
+                size_of_snake -= 1   
     case 13:
-        print("Вертикальная змейка")
-        n = 10 
-        for i in range(n):
-            print("*" if i % 2 == 0 else " ")
+        print('вертикальная змейка')
+        n, m = map(int, input().split())
+        k=0
+        for i in range(n*m):
+            k+=1
+            d = [['*' if (c % 2 != 0 and r == n - 1) or (c % 2 == 0 and (r != n - 1 or r % 2 == 0)) else ' ' for c in range(m)] for r in range(n)]
+        for row in d:
+            print(*row)
     case 14:
-        print("Горизонтальная змейка -н")
-        n = 10
-        for i in range(n): 
-            print("* " * (i // 2) + " " * (n - i - 1))
-    case 15:
-        print("Вложенные прямоугольники -н")
-        n = 10
-        for i in range(n):
-            print("*" * (n - i) + " " * i + " " * i + "*" * (n - i))
+        print("Вложенные прямоугольники")
+        w, h = map(int, input("Введите ширину и высоту внешнего прямоугольника: ").split())
+        n = int(input("Введите количество вложенных прямоугольников: "))
+        fill = input("Введите символ заполнения: ")
+        print(fill * w)
+        for i in range(h - 2):
+            line = fill
+            for j in range(w - 2):
+                line += ' '
+                for k in range(n):
+                    if i >= k and i < h - 2 - k and j >= k and j < w - 2 - k:
+                        line += ' '
+                    else:
+                        line += fill
+            line += fill
+            print(line)
+        print(fill * w)
+
+
                 
