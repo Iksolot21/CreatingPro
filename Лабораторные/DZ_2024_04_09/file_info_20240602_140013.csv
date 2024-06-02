@@ -1,0 +1,12 @@
+full_path,file_name,file_ext,file_size,mod_time
+.\file_info_20240602_140013.csv,file_info_20240602_140013,csv,49,2024-06-02 14:00:13
+.\labFilesInfoToCSV.ipynb,labFilesInfoToCSV,ipynb,1857,2024-05-27 00:20:00
+.\labFilesInfoToCSV.py,labFilesInfoToCSV,py,2317,2024-05-25 22:44:42
+.\labToolsHashFiles.py,labToolsHashFiles,py,1895,2024-05-19 16:26:24
+.\labToolsHashFilesStat.py,labToolsHashFilesStat,py,3484,2024-05-19 22:03:36
+.\labToolsHashFilesStatTest.ipynb,labToolsHashFilesStatTest,ipynb,5356,2024-05-20 10:03:50
+.\labToolsHashFilesTest.ipynb,labToolsHashFilesTest,ipynb,3882,2024-05-26 19:21:21
+.\__pycache__,__pycache__,,,
+.\__pycache__\labFilesInfoToCSV.cpython-311.pyc,labFilesInfoToCSV.cpython-311,pyc,3567,2024-05-26 19:23:25
+.\__pycache__\labFilesInfoToCSV.cpython-312.pyc,labFilesInfoToCSV.cpython-312,pyc,3021,2024-06-02 14:00:13
+.\__pycache__\labToolsHashFiles.cpython-311.pyc,labToolsHashFiles.cpython-311,pyc,3281,2024-05-26 19:17:46
