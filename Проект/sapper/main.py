@@ -1,5 +1,5 @@
 import sys
-
+import os
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QIcon
 from MineField import MineField
@@ -15,25 +15,34 @@ class MyWidget(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Minesweeper")
-        self.setWindowIcon(QIcon("assets/flag.png"))
+        icon_path = os.path.join(os.path.dirname(__file__), "assets", "flag.png")
+        self.setWindowIcon(QIcon(icon_path))
 
         self.field = MineField(self.w, self.h, self.form, self.color, self.cell_size)
         self.label = QLabel(f"Mines: {self.field.getMines()}")
         self.resButton = QPushButton("Restart")
         self.cngButton = QPushButton("Change field")
+        self.helpButton = QPushButton("Help") 
 
-        self.lt = QVBoxLayout(self)
-        self.lt.addWidget(self.label)
-        self.lt.addWidget(self.resButton)
-        self.lt.addWidget(self.cngButton)
-        self.lt.addWidget(self.field)
-        self.lt.addStretch()
+        self.vlt = QVBoxLayout()
+        self.vlt.addWidget(self.label)
+        self.vlt.addWidget(self.resButton)
+        self.vlt.addWidget(self.cngButton)
+        self.vlt.addWidget(self.helpButton)  
+        self.vlt.addWidget(self.field)
+        self.vlt.addStretch()
+
+        self.hlt = QHBoxLayout(self)
+        self.hlt.addStretch(1)  
+        self.hlt.addLayout(self.vlt) 
+        self.hlt.addStretch(1)
 
         self.field.changeCounter.connect(self.setVal)
         self.field.win.connect(self.win)
         self.field.explode.connect(self.lose)
         self.resButton.clicked.connect(self.restart)
         self.cngButton.clicked.connect(self.changeField)
+        self.helpButton.clicked.connect(self.showHelp)  
 
     def setVal(self, val):
         if self.field.state == self.field.s_play:
@@ -48,10 +57,14 @@ class MyWidget(QWidget):
     def restart(self):
         self.field.deleteLater()
         self.field = MineField(self.w, self.h, self.form, self.color, self.cell_size, parent=self)
-        self.lt.addWidget(self.field)
+        self.vlt.insertWidget(4, self.field) 
         self.field.changeCounter.connect(self.setVal)
         self.field.win.connect(self.win)
         self.field.explode.connect(self.lose)
+        if self.color == MineField.color_rainbow:
+            self.field.setCellColor(MineField.color_rainbow)
+        else:
+            self.field.setCellColor(MineField.colors[self.color])
         self.label.setText(f"Mines: {self.field.getMines()}")
 
     def changeField(self):
@@ -67,6 +80,12 @@ class MyWidget(QWidget):
                 self.field.setCellColor(MineField.color_rainbow)
             else:
                 self.field.setCellColor(MineField.colors[self.color])
+
+    def showHelp(self):
+        QMessageBox.information(self, "Help", "This project is a Minesweeper game. "
+                                             "You can restart the game, change the field settings, and customize the game appearance. "
+                                             "Try to uncover all the cells without detonating any mines!\n\n"
+                                             "Created by Артём Гусев, Group 231-3212.")
 
 app = QApplication(sys.argv)
 widget = MyWidget()

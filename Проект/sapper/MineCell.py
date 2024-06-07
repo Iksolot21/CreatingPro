@@ -1,5 +1,5 @@
 import math
-
+import os
 from PyQt5.QtCore import Qt, QPoint, QSize
 from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtGui import QRegion, QPolygon, QPainter, QPen, QColor, QIcon, QPixmap
@@ -40,8 +40,9 @@ class MineCell(QPushButton):
         self.borderPoints = []
 
         self.ic = QIcon()
-        self.ic.addPixmap(QPixmap("assets/flag.png"), QIcon.Mode.Normal)
-        self.ic.addPixmap(QPixmap("assets/flag.png"), QIcon.Disabled)
+        icon_path = os.path.join(os.path.dirname(__file__), "assets", "flag.png")
+        self.ic.addPixmap(QPixmap(icon_path), QIcon.Mode.Normal)
+        self.ic.addPixmap(QPixmap(icon_path), QIcon.Disabled)
 
         if form == self.t_hex:
             for it in range(7):
@@ -75,6 +76,7 @@ class MineCell(QPushButton):
     def setFlag(self, fl):
         if fl:
             self.setIcon(self.ic)
+            self.setIconSize(QSize(int(self.width() // 2), int(self.height() // 2)))  # Установка размера значка
             self.parent.counterDec(self.mine)
             self.fl = True
         else:
